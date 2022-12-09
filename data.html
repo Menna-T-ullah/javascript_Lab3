@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User: </h1>
+    <ul></ul>
+    <script>
+        window.onload = function() {
+            fetch('https://reqres.in/api/users?page=2')
+            
+                .then(res =>{
+                r=res.json();
+                console.log(r),
+                console.log(typeof r);
+                return r;
+             })
+             .then(res => {
+                   res.data.map(user => {
+                        const email=`<li>${user.email}</li>`;
+                        const avatar=`<li><img src=${user.avatar}></li>`;
+                        document.querySelector('ul').insertAdjacentHTML('beforeend',email);
+                        document.querySelector('ul').insertAdjacentHTML('beforeend',avatar);
+                        return user;
+                    });
+                })
+                .catch(error=>console.log(error));
+
+};
+// fetch('https://reqres.in/api/users')
+//   .then(res => res.json())
+//   .then(res => {
+//     res.data.map(user => {
+//         const email=`<li>${user.email}</li>`;
+//                          const avatar=`<li>${user.avatar}</li>`;
+//                          document.querySelector('ul').insertAdjacentHTML('beforeend',email);
+//                          document.querySelector('ul').insertAdjacentHTML('beforeend',avatar);
+//       console.log(`${user.id}: ${user.first_name} ${user.last_name}`)
+//     })
+//   })
+    </script>
+</body>
+</html>
